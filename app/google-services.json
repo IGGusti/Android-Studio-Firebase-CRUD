@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "308573364807",
+    "firebase_url": "https://fbcrud-ggm.firebaseio.com",
+    "project_id": "fbcrud-ggm",
+    "storage_bucket": "fbcrud-ggm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:308573364807:android:99dae2911b54cee0b88762",
+        "android_client_info": {
+          "package_name": "com.example.latihan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "308573364807-gaepsnhu3utgq45hdtm8jfgcm90h7oc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.latihan",
+            "certificate_hash": "016e3ec9d8ac8c4f3701e15ae83ae96e472fc7bb"
+          }
+        },
+        {
+          "client_id": "308573364807-irardmjseronb2ruqgpiaqojh8e2d962.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvMK1aKebpeGHqcm4DAGDEHiESLrjus34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "308573364807-irardmjseronb2ruqgpiaqojh8e2d962.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
