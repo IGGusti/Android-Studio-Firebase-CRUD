@@ -12,10 +12,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.latihan.models.data_mahasiswa;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Collections;
 
@@ -131,6 +135,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                   Digunakan untuk mendapatkan referensi dan meyimpan data pada Database
                   Akan dibahas pada Tutorial Berikutnya, Mengenai Fungsi Create
                  */
+                //Mendapatkan UserID dari pengguna yang Terautentikasi
+                String getUserID = auth.getCurrentUser().getUid();
+
+                //Mendapatkan Instance dari Database
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference getReference;
+
+                //Menyimpan Data yang diinputkan User kedalam Variable
+                String getNIM = NIM.getText().toString();
+                String getNama = Nama.getText().toString();
+                String getJurusan = Jurusan.getText().toString();
+
+                getReference = database.getReference(); // Mendapatkan Referensi dari Database
+
+                // Mengecek apakah ada data yang kosong
+                if(isEmpty(getNIM) && isEmpty(getNama) && isEmpty(getJurusan)){
+                    //Jika Ada, maka akan menampilkan pesan singkan seperti berikut ini.
+                    Toast.makeText(MainActivity.this, "Data tidak boleh ada yang kosong", Toast.LENGTH_SHORT).show();
+                }else {
+                /*
+                Jika Tidak, maka data dapat diproses dan meyimpannya pada Database
+                Menyimpan data referensi pada Database berdasarkan User ID dari masing-masing Akun
+                */
+                    getReference.child("Admin").child(getUserID).child("Mahasiswa").push()
+                            .setValue(new data_mahasiswa(getNIM, getNama, getJurusan))
+                            .addOnSuccessListener(this, new OnSuccessListener() {
+                                @Override
+                                public void onSuccess(Object o) {
+                                    //Peristiwa ini terjadi saat user berhasil menyimpan datanya kedalam Database
+                                    NIM.setText("");
+                                    Nama.setText("");
+                                    Jurusan.setText("");
+                                    Toast.makeText(MainActivity.this, "Data Tersimpan", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
                 break;
 
             case R.id.logout:
