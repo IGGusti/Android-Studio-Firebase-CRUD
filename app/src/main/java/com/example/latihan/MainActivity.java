@@ -188,6 +188,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.showdata:
                 // Digunakan untuk melihat data yang sudah tersimpan didalam Database
                 // Akan digunakan pada Tutorial Berikutnya, mengenai penggunaan Fungsi Read
+                startActivity(new Intent(MainActivity.this, MyListData.class));
                 break;
                 //coba push github
         }
