@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MyListData"/>
+        <activity android:name=".ui.UpdateData"/>
     </application>
 
 </manifest>

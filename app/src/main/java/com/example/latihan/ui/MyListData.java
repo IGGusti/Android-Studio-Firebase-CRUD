@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.latihan.R;
 import com.example.latihan.adapter.RecyclerViewAdapter;
-import com.example.latihan.models.data_mahasiswa;
+import com.example.latihan.models.DataMahasiswa;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +31,7 @@ public class MyListData extends AppCompatActivity {
 
     //Deklarasi Variable Database Reference dan ArrayList dengan Parameter Class Model kita.
     private DatabaseReference reference;
-    private ArrayList<data_mahasiswa> dataMahasiswa;
+    private ArrayList<DataMahasiswa> dataMahasiswa;
 
     private FirebaseAuth auth;
 
@@ -60,7 +60,7 @@ public class MyListData extends AppCompatActivity {
 
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                             //Mapping data pada DataSnapshot ke dalam objek mahasiswa
-                            data_mahasiswa mahasiswa = snapshot.getValue(data_mahasiswa.class);
+                            DataMahasiswa mahasiswa = snapshot.getValue(DataMahasiswa.class);
 
                             //Mengambil Primary Key, digunakan untuk proses Update dan Delete
                             mahasiswa.setKey(snapshot.getKey());

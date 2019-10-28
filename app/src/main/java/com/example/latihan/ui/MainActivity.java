@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.latihan.R;
-import com.example.latihan.models.data_mahasiswa;
+import com.example.latihan.models.DataMahasiswa;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Menyimpan data referensi pada Database berdasarkan User ID dari masing-masing Akun
                 */
                     getReference.child("Admin").child(getUserID).child("Mahasiswa").push()
-                            .setValue(new data_mahasiswa(getNIM, getNama, getJurusan))
+                            .setValue(new DataMahasiswa(getNIM, getNama, getJurusan))
                             .addOnSuccessListener(this, new OnSuccessListener() {
                                 @Override
                                 public void onSuccess(Object o) {
