@@ -16,21 +16,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.latihan.R;
 import com.example.latihan.models.DataMahasiswa;
+import com.example.latihan.ui.MyListData;
 import com.example.latihan.ui.UpdateData;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-
     //Deklarasi Variable
     private ArrayList<DataMahasiswa> listMahasiswa;
     private Context context;
+
+    //Membuat Interfece
+    public interface dataListener{
+        void onDeleteData(DataMahasiswa data, int position);
+    }
+
+    //Deklarasi objek dari Interfece
+    dataListener listener;
 
     //Membuat Konstruktor, untuk menerima input dari Database
     public RecyclerViewAdapter(ArrayList<DataMahasiswa> listMahasiswa, Context context) {
         this.listMahasiswa = listMahasiswa;
         this.context = context;
+        listener = (MyListData)context;
     }
 
     //ViewHolder Digunakan Untuk Menyimpan Referensi Dari View-View
@@ -80,11 +89,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     public void onClick(DialogInterface dialog, int i) {
                         switch (i){
                             case 0:
-                            /*
-                              Berpindah Activity pada halaman layout updateData
-                              dan mengambil data pada listMahasiswa, berdasarkan posisinya
-                              untuk dikirim pada activity selanjutnya
-                            */
+                        /*
+                          Berpindah Activity pada halaman layout updateData
+                          dan mengambil data pada listMahasiswa, berdasarkan posisinya
+                          untuk dikirim pada activity selanjutnya
+                        */
                                 Bundle bundle = new Bundle();
                                 bundle.putString("dataNIM", listMahasiswa.get(position).getNim());
                                 bundle.putString("dataNama", listMahasiswa.get(position).getNama());
@@ -95,7 +104,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                                 context.startActivity(intent);
                                 break;
                             case 1:
-                                //Pembahasan selanjutnya mengenai fungsi Delete
+                                //Menggunakan interface untuk mengirim data mahasiswa, yang akan dihapus
+                                listener.onDeleteData(listMahasiswa.get(position), position);
                                 break;
                         }
                     }
@@ -103,10 +113,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 alert.create();
                 alert.show();
                 return true;
-                    /*
-                      Kodingan untuk membuat fungsi Edit dan Delete,
-                      yang akan dibahas pada Tutorial Berikutnya.
-                     */
             }
         });
     }

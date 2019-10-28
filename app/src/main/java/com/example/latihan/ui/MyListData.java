@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.latihan.R;
 import com.example.latihan.adapter.RecyclerViewAdapter;
 import com.example.latihan.models.DataMahasiswa;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MyListData extends AppCompatActivity {
+public class MyListData extends AppCompatActivity implements RecyclerViewAdapter.dataListener {
 
     //Deklarasi Variable untuk RecyclerView
     private RecyclerView recyclerView;
@@ -100,5 +101,29 @@ public class MyListData extends AppCompatActivity {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.line));
         recyclerView.addItemDecoration(itemDecoration);
+    }
+
+    @Override
+    public void onDeleteData(DataMahasiswa data, int position) {
+        /*
+         * Kode ini akan dipanggil ketika method onDeleteData
+         * dipanggil dari adapter pada RecyclerView melalui interface.
+         * kemudian akan menghapus data berdasarkan primary key dari data tersebut
+         * Jika berhasil, maka akan memunculkan Toast
+         */
+        String userID = auth.getUid();
+        if(reference != null){
+            reference.child("Admin")
+                    .child(userID)
+                    .child("Mahasiswa")
+                    .child(data.getKey())
+                    .removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(MyListData.this, "Data Berhasil Dihapus", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
     }
 }
