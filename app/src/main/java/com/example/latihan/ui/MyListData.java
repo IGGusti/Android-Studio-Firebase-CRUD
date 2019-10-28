@@ -1,4 +1,4 @@
-package com.example.latihan;
+package com.example.latihan.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.latihan.R;
 import com.example.latihan.adapter.RecyclerViewAdapter;
 import com.example.latihan.models.data_mahasiswa;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +38,7 @@ public class MyListData extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R .layout.activity_my_list_data);
+        setContentView(R.layout.activity_my_list_data);
         recyclerView = findViewById(R.id.datalist);
         getSupportActionBar().setTitle("Data Mahasiswa");
         auth = FirebaseAuth.getInstance();
